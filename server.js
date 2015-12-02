@@ -27,6 +27,12 @@ mongoose.connect(mongoUri, (err) => {
 	}
 });
 
+// Routes
+
+
+
+
+
 // Server Setup
 server.listen(app.get('port'), () => {
 	let host = server.address().address;
