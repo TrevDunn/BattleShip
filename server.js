@@ -1,6 +1,6 @@
 'use strict';
 
-// Setup NPM Modules
+// Require NPM Modules
 const express		= require('express');
 const app			= express();
 const server 		= require('http').createServer(app);
@@ -8,13 +8,20 @@ const io			= require('socket.io')(server);
 const request 		= require('request');
 const bodyParser	= require('body-parser');
 const mongoose		= require('mongoose');
+const logger 		= require('morgan');
 
+// Require Routes
+const userRoutes	= require('./routes/userRoutes.js');
+const shipRoutes	= require('./routes/shipRoutes.js')
 
-// Additional Setup
+// Additional Epress Setup
+app.use(logger('dev'));
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use('/', express.static(__dirname + '/public'));
+app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 // Connect to Database (MongoLab or Mongodb)
 var mongoUri = process.env.MONGOLAB_URI ||
@@ -28,6 +35,9 @@ mongoose.connect(mongoUri, (err) => {
 });
 
 // Routes
+app.use('/', userRoutes);
+app.use('/ship', shipRoutes);
+
 
 
 
