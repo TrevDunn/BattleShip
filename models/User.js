@@ -43,10 +43,3 @@ UserSchema.methods.authenticate = function(password, callback) {
 let User = mongoose.model('User', UserSchema);
 
 module.exports = User;
-
-
-
-
-
-
-//Footnote: Much of the authentication can be attributed to the work of Amy Shi

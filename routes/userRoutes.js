@@ -3,8 +3,8 @@
 const express		= require('express');
 const router		= express.Router();
 // const bodyParser	= require('body-parser');
-// const user			= require('../controllers/userController')
-const jwt	= require('express-jwt');
+// const user		= require('../controllers/userController')
+const jwt			= require('express-jwt');
 const secret		= "bosco";
 // const secret		= process.env.SECRET;
 
@@ -14,37 +14,37 @@ const secret		= "bosco";
 
 // User CRUD
 router.route('/user/signup')
-	.post(user.create);
+	.post(create);
 
 router.route('/user/:username')
 	.all(jwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
-	.get(user.retrieve)
-	.put(user.update)
-	.delete(user.destory);
+	.get(retrieve)
+	.put(update)
+	.delete(destroy);
 
 // router.route('/user')
 // 	.all(jwt({
 // 		secret: secret,
 // 		userProperty: 'auth'
 // 	}))
-// 	.delete(user.destroy);
+// 	.delete(destroy);
 
-router.routes('/user/:username/addWin')
+router.route('/user/:username/addWin')
 	.all(jwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
-	.put(user.addWin)
+	.put(addWin);
 
-router.routes('/user/:username/addLoss')
+router.route('/user/:username/addLoss')
 	.all(jwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
-	.put(user.addLoss);
+	.put(addLoss);
 
 
 // post new user
@@ -78,6 +78,16 @@ function update(req, res){
 	})
 }
 
+
+function destroy(req, res) {
+	let userParams = req.body;
+	let query = {username: userParams.username};
+	User.findOneAndRemove(query, (err, user) => {
+		if (err) throw err;
+		res.send({"record" : "deleted"});
+	});
+}
+
 function addWin(req, res){
 	let userParams = req.body;
 	let query = {username: req.params.username};
@@ -89,12 +99,14 @@ function addWin(req, res){
 	});
 }
 
-function destroy(req, res) {
+function addLoss(req, res){
 	let userParams = req.body;
-	let query = {username: userParams.username};
-	User.findOneAndRemove(query, (err, user) => {
-		if (err) throw err;
-		res.send({"record" : "deleted"});
+	let query = {username: req.params.username};
+	let update = {loss: userParams.username};
+	let options = {new: true};
+	User.findOneAndUpdate(query, update, options, (err, user) => {
+		if (err) res.status(401).send({message: err.errmsg});
+		res.send(user);
 	});
 }
 
