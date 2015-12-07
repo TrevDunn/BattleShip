@@ -14,7 +14,7 @@ let UserSchema = new mongoose.Schema({
 
 
 // Authentication – Using bcrypt
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next) {
 	let user = this;
 
 	// Hashes password if created or updated

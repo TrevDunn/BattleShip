@@ -36,7 +36,7 @@ mongoose.connect(mongoUri, (err) => {
 
 // Routes
 app.use('/', userRoutes);
-app.use('/ship', shipRoutes);
+// app.use('/ship', shipRoutes);
 
 
 

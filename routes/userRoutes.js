@@ -8,6 +8,9 @@ const jwt			= require('express-jwt');
 const secret		= "bosco";
 // const secret		= process.env.SECRET;
 
+// Require models
+const User 			= require('../models/user');
+
 // // Authorize user
 // router.route('/user/auth')
 // 	.post(user.auth);
@@ -49,6 +52,7 @@ router.route('/user/:username/addLoss')
 
 // post new user
 function create(req, res){
+	console.log('hit: create funciton');
 	let userObject = new User(req.body);
 	userObject.save((err, user) => {
 		if (err) res.status(401).send({message: err.errmsg});

@@ -1,0 +1,109 @@
+/*Battleship2*/
+
+nav#nav-bar{
+	
+}
+
+/*Battleship*/
+
+body {
+	font-family: helvetica, arial;
+	overflow: scroll;
+	background-color: darkgrey;
+}
+
+button {
+	position: relative;
+	text-align: center;
+	margin-left: 4px;
+	margin-top: 4px;
+	font-size: 20px;
+
+}
+
+#container {
+	border: 10px solid rgb(20, 20, 20);
+	display: inline-block;
+	overflow: scroll;
+	margin: 0 auto;
+	margin-left: 14%;
+}
+
+.game-board {
+	border: 5px solid darkgrey;
+	background: rgb(110, 110, 256);
+	display: inline-block;
+	float: right;
+}
+
+.latitude {
+	display: block;
+}
+
+.square-space {
+	display: inline-block;
+	border: 2px solid rgba(88, 200, 0, 1);
+	padding: 20px;
+	max-width: 100px;
+	min-width: 20px;
+	max-height: 100px;
+	min-height: 20px;
+	height: 20px;
+	width: 20px;
+	color: blue;
+	text-align: center;
+	vertical-align: center;
+	font-size: 21px;
+	/*z-index: 1000;*/
+}
+
+
+
+section#ship-key {
+	overflow: hidden;
+	border: 2px solid rgba(88, 200, 0, 1);
+	display: inline-block;
+	float: left;
+	background-color: lightgrey;
+}
+
+li{
+	display: block;
+}
+
+li.boat-button {
+	display: inline;
+}
+
+div.block-holder {
+	display: inline-flex;
+	background: solid red;
+}
+
+div [type='boat-blocks'] {
+	width: 20px;
+	height: 20px;
+	background: rgb(204, 224, 210);
+	border: 1px solid rgb(0, 100, 30);
+}
+#timer {
+	float: right;
+	border: 2px solid rgba(88, 200, 0, 1);
+	display: inline-block;
+	text-align: center;
+	font-size: 80px;
+	width: 170px;
+	height: 334px;
+	background-color: lightgrey;
+
+}
+#hit {
+	border: 2px solid red;
+	background-color: rgba(256, 0, 0, .3);
+	color: red;
+}
+
+#boat-hits {
+	border: 1px solid red;
+	background: rgb(255, 179, 179);
+}
