@@ -1,6 +1,6 @@
 'use strict';
 
-const request 		= ('request');
+// const request 		= ('request');
 
 
 let GameLogic = (function(){
@@ -12,8 +12,6 @@ let GameLogic = (function(){
 		xCoord 		= 0,
 		yCoord 		= 0
 	};
-
-	//
-
+	let playerShips = {}
 
 })

@@ -2,25 +2,26 @@
 
 const express		= require('express');
 const router		= express.Router();
-// const bodyParser	= require('body-parser');
+const bodyParser	= require('body-parser');
 // const user		= require('../controllers/userController')
-const jwt			= require('express-jwt');
+const ejwt			= require('express-jwt');
+const jwt			= require('jsonwebtoken');
 const secret		= "bosco";
 // const secret		= process.env.SECRET;
 
 // Require models
 const User 			= require('../models/user');
 
-// // Authorize user
-// router.route('/user/auth')
-// 	.post(user.auth);
+// Authorize user
+router.route('/user/auth')
+	.post(auth);
 
 // User CRUD
 router.route('/user/signup')
 	.post(create);
 
 router.route('/user/:username')
-	.all(jwt({
+	.all(ejwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
@@ -29,21 +30,21 @@ router.route('/user/:username')
 	.delete(destroy);
 
 // router.route('/user')
-// 	.all(jwt({
+// 	.all(ejwt({
 // 		secret: secret,
 // 		userProperty: 'auth'
 // 	}))
 // 	.delete(destroy);
 
 router.route('/user/:username/addWin')
-	.all(jwt({
+	.all(ejwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
 	.put(addWin);
 
 router.route('/user/:username/addLoss')
-	.all(jwt({
+	.all(ejwt({
 		secret: secret,
 		userProperty: 'auth'
 	}))
@@ -117,7 +118,7 @@ function addLoss(req, res){
 // Authentication (tokens)
 function auth(req, res) {
 	let userParams = req.body;
-	if (userParams.username == undefined || userparams.password == undefined) {
+	if (userParams.username == undefined || userParams.password == undefined) {
 		res.status(401).send({message: "valid login required"});
 	}
 	User.findOne({username: userParams.username }, (err, user) => {

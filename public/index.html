@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="">
+<html ng-app="BattleshipApp">
 	<head>
 		<meta charset="utf-8">
 		<title>BattleShip</title>
@@ -15,54 +15,48 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- JS Resources -->
 		<script src="js/script.js"></script>
-		<!-- <script src="js/app.js"></script> -->
+		<script src="js/app.js"></script>
 	</head>
 	<body>
 
-		<!-- Top Nav Bar -->
-		<nav id="menu">
-			<ul id="nav-bar">
-				<li class="nav-tool" id="nav-profile">
-				PROFILE
-				</li> |
-				<li class="nav-tool" id="nav-logout">
-				LOGOUT
-				</li>
-			</ul>
-		</nav>
+		<div class="container">
 
-		<div class="gameboard">
-			<button id="start-round">Start Round</button>
-			<div id="question">
-				Question:
-			</div>
-			<div id="cards-in-play">
-				cards in play
-			</div>
-			<div id="user-hand">
-				Your Hand (user cards)
-				<div id="user-cards">
+			<!-- Top Nav Bar -->
+			<nav id="menu">
+				<button id="start-round">Start Round</button>
+				<ul id="nav-bar">
+					<li class="nav-tool" id="nav-profile">
+						PROFILE
+					</li> |
+					<li class="nav-tool" id="nav-logout">
+						LOGOUT
+					</li>
+				</ul>
+			</nav>
 
+			<!-- Game Board -->
+			<div class="game-board">
+				<div class="board-half">
+					<div class="tile-displays" id="player-tiles">
+
+					</div>
+					<div id="player-name">
+
+					</div>
+				</div>
+				<div class="board-half">
+					<div class="tile-displays" id="opponent-tiles">
+
+					</div>
+					<div id="opponent-name">
+
+					</div>
 				</div>
 			</div>
 		</div>
 
-		  <div class="sidebar" id="side-chat" >
-				<div class="profile-receiver" id="game-status">
-					game stats
-				</div>
 
-			<div class="profile-receiver" id="profile-status"></div>
-
-			<div class="chat">
-			  <ul id="messages">
-
-			  </ul>
-			  <textarea id="message" placeholder="enter comment here"></textarea><button id="msg-submit">Send</button>
-			</div>
-		  </div>
-
-
+		<!-- Log-in: Form and submit -->
 		<div class="user-view user-login">
 	    	<h1 class="title-card"></h1>
 	    	<!-- <form id="login-form"> -->
@@ -77,21 +71,21 @@
 	    	</a>
 	    </div>
 
-		<!-- Signup -->
-	    <div class="user-view user-signup">
-	    	<h1 class="title-card"></h1>
-	    	<!-- <form id="signup-form"> -->
-	  		<div class="form-box">
-	  			<input type="text" placeholder="Username" id="signup-username" value=""><br>
-	  			<input type="password" placeholder="Password" id="signup-password"><br>
-	  		</div>
+		<!-- Signup: Form and Submit -->
+		<div class="user-view user-signup">
+			<h1 class="title-card"></h1>
+			<!-- <form id="signup-form"> -->
+			<div class="form-box">
+				<input type="text" placeholder="Username" id="signup-username" value=""><br>
+				<input type="password" placeholder="Password" id="signup-password"><br>
+			</div>
 
-	  		<button class="submit-butt" id="signup-submit">Sign Up</button>
-	    	<!-- </form> -->
-	    	<a href="localhost:3000/login">
-	    		<h4 id="loginlink">Back to Login</h4>
-	    	</a>
-	    </div>
+			<button class="submit-butt" id="signup-submit">Sign Up</button>
+			<!-- </form> -->
+			<a href="localhost:3000/login">
+				<h4 id="loginlink">Back to Login</h4>
+			</a>
+		</div>
 
 		This is a test to see if things are working.
 		<!-- <script type="text/javascript" src="js/bundle.js" charset="utf-8"></script> -->

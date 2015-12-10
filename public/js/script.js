@@ -39,6 +39,7 @@ $(function() {
     // login user using token
     $('#login-submit').click((event) => {
   		login();
+		console.log('hit: login-submit (script.js)');
     });
 
   	// allow user to press "enter" to login
@@ -97,13 +98,14 @@ let login = function() {
 	myUser = username;
 	myId = socket.id;
 	socket.emit('add user', username);
-
+	console.log('hit: login function');
 	$.ajax({
 		url: "/user/auth",
 		method: "POST",
 		data: userData
 
 	}).done((user) => {
+		// Actions taken on successful log-in
 		localStorage.setItem('userToken', user.token);
 		$('.container').show();
 		$('.user-login').hide();
@@ -129,10 +131,17 @@ let signup = function() {
 	});
 }
 
+// start game
+let gameStart = function() {
+
+}
+
+// generate game boards
 let buildOcean = function(){
 
 	//creates the div game-board
 	var tempBoard = document.createElement('div');
+		$('div#container').
 	tempBoard.className = 'game-board';
 	tempBoard.id = 'guess-board';
 	document.querySelector('div#container').appendChild(tempBoard);
@@ -189,6 +198,10 @@ let buildOcean = function(){
 				};
 
 			}));
-	};
+		};
+	}
 }
+
+let buildBoard = function() {
+
 }
