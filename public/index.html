@@ -38,12 +38,13 @@
 			<!-- Game Board -->
 			<div class="gameplay-section"
 		 	ng-controller="GameController as game">
-				<div class="split-screen">
+				<div class="split-screen" id="p1-board">
 					<!-- Player One -->
 					<table class="half-board">
 						<tbody>
 							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}">
+								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+								class="square-space">
 								{{ cell.marker }}
 								</td>
 							</tr>
@@ -55,8 +56,18 @@
 					</div>
 				</div>
 
-				<!-- Player Two -->
-				<div class="split-screen">
+				<div class="split-screen" id="p2-board">
+					<!-- Player Two -->
+					<table class="half-board">
+						<tbody>
+							<tr ng-repeat="array in game.array">
+								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+								class="square-space">
+								{{ cell.marker }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					<div id="opponent-name">
 
 					</div>

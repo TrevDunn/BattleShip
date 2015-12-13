@@ -127,6 +127,16 @@ div [type='boat-blocks'] {
 
 }
 
+#p1-board {
+	float: left;
+}
+
+#p2-board {
+	float: right;
+}
+
+
+
 /*//////////////////
 // Game Function  //
 //////////////////*/
