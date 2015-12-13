@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="BattleshipApp">
+<html ng-app="Battleship2">
 	<head>
 		<meta charset="utf-8">
 		<title>BattleShip</title>
@@ -16,6 +16,7 @@
 		<!-- JS Resources -->
 		<script src="js/script.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/gameController.js"></script>
 	</head>
 	<body>
 
@@ -35,19 +36,24 @@
 			</nav>
 
 			<!-- Game Board -->
-			<div class="game-board">
-				<div class="board-half">
-					<div class="tile-displays" id="player-tiles">
+			<div class="gameplay-section">
+				<div class="half-board">
+					<table class="board">
+						<tbody>
+							<tr ng-repeat="row in board.grid">
+								<td ng-repeat="cell in row" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}">
+								{{ cell.marker }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-					</div>
 					<div id="player-name">
 
 					</div>
 				</div>
 				<div class="board-half">
-					<div class="tile-displays" id="opponent-tiles">
-
-					</div>
+					<ocean ng-controller="oceanController as ocean" id="opponent-tiles"></ocean>
 					<div id="opponent-name">
 
 					</div>
