@@ -1,13 +1,24 @@
+'use strict';
+
 angular.module('Battleship2')
-  .controller('gameController', gameController);
+	.controller('GameController', GameController)
 
-  console.log('hit: gameController.js');
+console.log('hit: GameController.js');
 
-function gameController(){
-	console.log('hit: gameView function inside gameController.js');
-	var self = this;
-	self.all = [];
-	for (var i = 0; i < 10; i++) {
-		self.all.push({number: [i]+1});
+GameController.$inject = ['$http'];
+
+function GameController($http) {
+	console.log('hit: GameController function');
+
+	let self = this;
+	self.array = [];
+	generateBoardArray();
+
+
+
+	function generateBoardArray() {
+		for (let i = 0; i < 10; i++) {
+			self.array.push({number: [i]+1});
+		}
 	}
 }
