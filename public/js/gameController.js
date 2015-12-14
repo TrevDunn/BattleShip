@@ -1,6 +1,12 @@
 'use strict';
-console.log('this is my' + token);
-// var token;
+
+let socket = io();
+let myUser;
+let myId;
+let token;
+
+
+console.log('this is my token: ' + token);
 
 angular.module('Battleship2')
 	.controller('GameController', GameController)
@@ -12,7 +18,7 @@ console.log('hit: GameController.js');
 
 GameController.$inject = ['$http'];
 function GameController($http) {
-	console.log('hit: GameController function');
+	console.log('hit: GameController public/js/gameController.js');
 
 	// controller variable setup
 	let self = this;
@@ -42,6 +48,7 @@ function GameController($http) {
 
 UsersController.$inject = ['$http'];
 function UsersController($http) {
+	console.log('hit: UsersController in public/js/gameController.js');
 	let self = this;
 	self.all = [];
 	self.postUser = {};				// C
@@ -51,7 +58,7 @@ function UsersController($http) {
 	self.toggleLoginSignUp = true;
 
 	function getUser() {
-		console.log('hit UsersControllers getUser function');
+		console.log('hit: UsersControllers getUser function');
 		$http
 			.get('http://localhost:3000/user')
 			.then(function(respose){
@@ -60,7 +67,7 @@ function UsersController($http) {
 	}
 
 	function postUser() {
-		console.log('hit UsersControllers postUser function');
+		console.log('hit: UsersControllers postUser function');
 
 		$http
 			.post('http://localhost:3000/user', self.postUser)
@@ -71,7 +78,7 @@ function UsersController($http) {
 	}
 
 	function destroyUser(user) {
-		console.log('hit UsersControllers destroyUser function');
+		console.log('hit: UsersControllers destroyUser function');
 		$http
 			.delete('http://localhost:3000/user'+ user._id )
 			.then(function(response){
@@ -85,13 +92,22 @@ function UsersController($http) {
 // Authorization Controller Function
 AuthController.$inject = ['$http'];
 function AuthController($http) {
+	console.log('hit: AuthController in public/js/gameController.js');
 	let self = this;
 	self.login = login;
 	self.token = token;
-	// self.test = "";
+
 
 	function login(user) {
 		$http
-			.post("http://localhost:3000/auth")
+			.post("http://localhost:3000/auth", { username: user.username, password: user.password})
+			.success(function(data, status){
+				if(data.token){
+					token = data.token;
+					// self.token = data.token;
+					console.log(data.token);
+					console.log(token);
+				}
+			})
 	}
 }
