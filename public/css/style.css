@@ -58,7 +58,7 @@ button {
 	margin-left: 14%;
 }
 
-.game-board {
+.split-screen {
 	border: 5px solid darkgrey;
 	background: rgb(110, 110, 256);
 	display: inline-block;
@@ -135,6 +135,9 @@ div [type='boat-blocks'] {
 	float: right;
 }
 
+.split-screen {
+	background-color: darkgrey;
+}
 
 
 /*//////////////////

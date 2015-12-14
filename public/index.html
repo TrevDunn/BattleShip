@@ -20,7 +20,7 @@
 	</head>
 	<body >
 
-		<div class="container">
+		<div class="container" ng-controller="GameController as game">
 
 			<!-- Top Nav Bar -->
 			<nav id="menu">
@@ -37,7 +37,7 @@
 
 			<!-- Game Board -->
 			<div class="gameplay-section"
-		 	ng-controller="GameController as game">
+		 	 ng-show="game.showGameBoard">
 				<div class="split-screen" id="p1-board">
 					<!-- Player One -->
 					<table class="half-board">
@@ -45,7 +45,7 @@
 							<tr ng-repeat="array in game.array">
 								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
 								class="square-space">
-								{{ cell.marker }}
+
 								</td>
 							</tr>
 						</tbody>
@@ -75,9 +75,8 @@
 			</div>
 		</div>
 
-
 		<!-- Log-in: Form and submit -->
-		<div class="user-view user-login">
+		<div class="user-view user-login" ng-show="game.showLogin">
 	    	<h1 class="title-card"></h1>
 	    	<!-- <form id="login-form"> -->
 	  		<div class="form-box">
