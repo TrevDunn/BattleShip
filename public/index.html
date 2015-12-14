@@ -50,9 +50,7 @@
 							</tr>
 						</tbody>
 					</table>
-
 					<div id="player-name">
-
 					</div>
 				</div>
 
@@ -63,7 +61,6 @@
 							<tr ng-repeat="array in game.array">
 								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
 								class="square-space">
-								{{ cell.marker }}
 								</td>
 							</tr>
 						</tbody>
@@ -75,23 +72,25 @@
 			</div>
 		</div>
 
+		<div ng-controller="UsersController as users">
+
 		<!-- Log-in: Form and submit -->
-		<div class="user-view user-login" ng-show="game.showLogin">
+		<div class="user-view user-login" ng-show="users.toggleLoginSignUp">
 	    	<h1 class="title-card"></h1>
 	    	<!-- <form id="login-form"> -->
 	  		<div class="form-box">
 	  			<input type="text" placeholder="Username" id="login-username"><br>
 	  			<input type="password" placeholder="Password" id="login-password">
 	  		</div>
-	  		<button class="submit-butt" id="login-submit">Login</button>
+	  		<button class="submit-butt" id="login-submit" ng-submit="users.addUser()">Login</button>
 	    	<!-- </form> -->
 	    	<a href="localhost:3000/signup">
-	        <h4 id="signuplink">Sign Up</h4>
+	        <h4 id="signuplink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Sign Up</h4>
 	    	</a>
 	    </div>
 
 		<!-- Signup: Form and Submit -->
-		<div class="user-view user-signup">
+		<div class="user-view user-signup" ng-show="!users.toggleLoginSignUp">
 			<h1 class="title-card"></h1>
 			<!-- <form id="signup-form"> -->
 			<div class="form-box">
@@ -102,9 +101,10 @@
 			<button class="submit-butt" id="signup-submit">Sign Up</button>
 			<!-- </form> -->
 			<a href="localhost:3000/login">
-				<h4 id="loginlink">Back to Login</h4>
+				<h4 id="loginlink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Back to Login</h4>
 			</a>
 		</div>
+	</div>
 
 		This is a test to see if things are working.
 	</body>

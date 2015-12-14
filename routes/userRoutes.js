@@ -126,8 +126,10 @@ function auth(req, res) {
 			if (err) console.log(err);
 			if (isMatch) {
 				res.status(200).send({message: "valid username and password", token: jwt.sign(user, secret, {expiresIn: '1h'})});
+				console.log('Successful login');
 			} else {
 				res.status(401).send({message: "valid login required"});
+				console.log('Login Failed');
 			}
 		})
 	})
