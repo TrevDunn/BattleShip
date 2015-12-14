@@ -82,7 +82,7 @@
 	  			<input type="text" placeholder="Username" id="login-username"><br>
 	  			<input type="password" placeholder="Password" id="login-password">
 	  		</div>
-	  		<button class="submit-butt" id="login-submit" ng-submit="users.addUser()">Login</button>
+	  		<button class="submit-butt" id="login-submit" ng-submit="">Login</button>
 	    	<!-- </form> -->
 	    	<a href="localhost:3000/signup">
 	        <h4 id="signuplink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Sign Up</h4>
@@ -98,7 +98,7 @@
 				<input type="password" placeholder="Password" id="signup-password"><br>
 			</div>
 
-			<button class="submit-butt" id="signup-submit">Sign Up</button>
+			<button class="submit-butt" id="signup-submit" ng-submit="users.addUser()">Sign Up</button>
 			<!-- </form> -->
 			<a href="localhost:3000/login">
 				<h4 id="loginlink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Back to Login</h4>

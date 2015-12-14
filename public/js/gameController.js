@@ -77,7 +77,7 @@ function UsersController($http) {
 			.then(function(response){
 				let index = self.all.indexOf(user);
 				self.all.splice(index, 1);
-			})
+			});
 	}
 }
 
