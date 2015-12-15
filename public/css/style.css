@@ -58,6 +58,11 @@ button {
 	margin-left: 14%;
 }
 
+.container {
+	max-width: 92%;
+	margin: 0 auto;
+}
+
 .split-screen {
 	border: 5px solid darkgrey;
 	background: rgb(110, 110, 256);

@@ -26,6 +26,14 @@ function GameController($http) {
 	self.showGameBoard = false;
 	self.playerArray = [];
 	self.test = 'This is a good test';
+	self.newShip = {};
+	self.shipList = [
+		{ name: 'Aircraft Carrier', length: 5 },
+		{ name: 'Battleship', length: 4 },
+		{ name: 'Cruiser', length: 3 },
+		{ name: 'Destroyer', length: 3 },
+		{ name: 'Frigate', length: 2 },
+	];
 
 	// function calls
 	generateBoardArray();
@@ -36,8 +44,6 @@ function GameController($http) {
 			self.array.push({number: [i]+1});
 		}
 	}
-
-
 }
 
 UsersController.$inject = ['$http'];

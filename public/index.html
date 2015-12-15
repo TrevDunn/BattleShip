@@ -56,13 +56,13 @@
 				</div>
 				<!-- Ship-Placement Box -->
 				<section class="ship-container" id="ship-key">
-					<tbody>
-						<tr ng-repeat="array in game.array">
+					<ul>
+						<li ng-repeat="array in game.array">
 							<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
 							class="square-space">
 							</td>
-						</tr>
-					</tbody>
+						</li>
+					</ul>
 				</section>
 
 				<div class="split-screen" id="p2-board">
