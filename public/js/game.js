@@ -17,7 +17,9 @@ let GameModule = (function(){
 
 	let playerShips = [];
 	let playerArray = [];
+	let usedCoords = [];
 
+	// ship constructor function
 	function Ship(id, length, user, bow_x, bow_y, ori_x){
 		this.id = id;
 		this.length = length;
@@ -48,7 +50,23 @@ let GameModule = (function(){
 			}
 		},
 
-		// check to see if ship goes over the boundaries
+		// fill in usedCoords array
+		fillCoords: function(newShip.length, newShip.ori_x, newShip.bow_x, newShip.bow_y){
+			for (let i = 0; i < newShip.length; i++) {
+				// if oriented on X-axis
+				if (newShip.ori_x) {
+					let newBowCoords = { xc: (i + newShip.bow_x), yc: newShip.bow_y };
+				} else if (!newShip.ori_x) {
+					let newBowCoords = { xc:  newShip.bow_x, yc: (i + newShip.bow_y) };
+				} else {
+					console.log('something went wrong in fillCoords');
+				}
+			}
+		},
+
+		// check to see if ship overlaps others
+
+
 
 		// check to see if ship
 
@@ -57,6 +75,7 @@ let GameModule = (function(){
 		resetGame: function(){
 			playerShips = [];
 			playerArray = [];
+			usedCoords = [];
 		},
 	}
 })();
