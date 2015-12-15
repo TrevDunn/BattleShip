@@ -18,7 +18,7 @@
 		<script src="js/app.js"></script>
 		<script src="js/gameController.js"></script>
 	</head>
-	<body >
+	<body ng-controller="AuthController as auth">
 
 		<div class="container" ng-controller="GameController as game">
 
@@ -72,35 +72,32 @@
 			</div>
 		</div>
 
-		<div ng-controller="UsersController as users">
+		<div ng-show="auth.token == undefined" >
 
 			<!-- Log-in: Form and submit -->
-			<div ng-controller="AuthController as auth">
+			<div ng-controller="UsersController as users">
 				<div class="user-view user-login" ng-show="users.toggleLoginSignUp">
 					<h1 class="title-card"></h1>
 					<!-- <form id="login-form"> -->
 					<div class="form-box">
-						<input type="text" placeholder="Username" id="login-username"><br>
-						<input type="password" placeholder="Password" id="login-password">
+						<input type="text" placeholder="Username" id="login-username" ng-model="user.username"><br>
+						<input type="password" placeholder="Password" id="login-password" ng-model="user.password">
 					</div>
-					<button class="submit-butt" id="login-submit" ng-submit="">Login</button>
+					<button class="submit-butt" id="login-submit" ng-click="auth.login(user); ">Login</button>
 					<!-- </form> -->
 					<a href="localhost:3000/signup">
 						<h4 id="signuplink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Sign Up</h4>
 					</a>
 				</div>
-			</div>
 
 			<!-- Signup: Form and Submit -->
-			<div >
 				<div class="user-view user-signup" ng-hide="users.toggleLoginSignUp">
 					<h1 class="title-card"></h1>
 					<!-- <form id="signup-form"> -->
 					<div class="form-box">
-						<input type="text" placeholder="Username" id="signup-username" value=""><br>
-						<input type="password" placeholder="Password" id="signup-password"><br>
+						<input type="text" placeholder="Username" id="signup-username" value="" ng-model="users.postUser.username"><br>
+						<input type="password" placeholder="Password" id="signup-password" ng-model="users.postUser.password"><br>
 					</div>
-
 					<button class="submit-butt" id="signup-submit" ng-submit="users.addUser()">Sign Up</button>
 					<!-- </form> -->
 					<a href="localhost:3000/login">
@@ -109,7 +106,8 @@
 				</div>
 			</div>
 		</div>
-
-		This is a test to see if things are working.
+		<footer>
+			Provided by Trevor Dunn
+		</footer>
 	</body>
 </html>

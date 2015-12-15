@@ -96,18 +96,26 @@ function AuthController($http) {
 	let self = this;
 	self.login = login;
 	self.token = token;
+	self.allowGame = false;
 
 
 	function login(user) {
+		console.log('hit: AuthControllers login function');
 		$http
-			.post("http://localhost:3000/auth", { username: user.username, password: user.password})
+			.post("http://localhost:3000/user/auth", { username: user.username, password: user.password})
 			.success(function(data, status){
 				if(data.token){
 					token = data.token;
-					// self.token = data.token;
+					self.token = data.token;
 					console.log(data.token);
 					console.log(token);
 				}
+			})
+			.then(function(){
+				// hide login and signup, show
+
+
+				console.log(self.token);
 			})
 	}
 }
