@@ -29,7 +29,6 @@ function GameController($http) {
 
 	// function calls
 	generateBoardArray();
-	// showGameAtLogin();
 
 	// creates board-array
 	function generateBoardArray() {
@@ -38,12 +37,7 @@ function GameController($http) {
 		}
 	}
 
-	// successful login shows boards
-	// function showGameAtLogin() {
-	// 	if token = true {
-	// 		self.showGameBoard = true;
-	// 	}
-	// }
+
 }
 
 UsersController.$inject = ['$http'];
