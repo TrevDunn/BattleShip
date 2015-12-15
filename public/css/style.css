@@ -77,6 +77,7 @@ button {
 .square-space {
 	display: inline-block;
 	border: 2px solid rgba(88, 200, 0, 1);
+	border-bottom: 0;
 	padding: 15px;
 	max-width: 100px;
 	min-width: 15px;
@@ -112,17 +113,19 @@ li.boat-button {
 	display: inline;
 }
 
-div.block-holder {
-	display: inline-flex;
+
+.block-holder {
+	display: flex;
 	background: solid red;
 }
 
-div [type='boat-blocks'] {
+span.boat-blocks{
 	width: 20px;
 	height: 20px;
 	background: rgb(204, 224, 210);
 	border: 1px solid rgb(0, 100, 30);
 }
+
 #timer {
 	float: right;
 	border: 2px solid rgba(88, 200, 0, 1);

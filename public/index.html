@@ -56,12 +56,20 @@
 				</div>
 				<!-- Ship-Placement Box -->
 				<section class="ship-container" id="ship-key">
-					<ul>
-						<li ng-repeat="array in game.array">
-							<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
-							class="square-space">
-							</td>
-						</li>
+					<ul class="ship-key">
+						<div ng-repeat="ship in game.shipList" >
+							<li class="ship-name">
+								{{ ship.name }}
+							</li>
+
+							<li class="boat-button">
+								<div class="block-holder">
+									<span class="boat-blocks"ng-repeat="array in ship.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+									class="square-space">
+									</span>
+								</div>
+							</li>
+						</div>
 					</ul>
 				</section>
 

@@ -28,20 +28,33 @@ function GameController($http) {
 	self.test = 'This is a good test';
 	self.newShip = {};
 	self.shipList = [
-		{ name: 'Aircraft Carrier', length: 5 },
-		{ name: 'Battleship', length: 4 },
-		{ name: 'Cruiser', length: 3 },
-		{ name: 'Destroyer', length: 3 },
-		{ name: 'Frigate', length: 2 },
+		{ name: 'Aircraft Carrier', length: 5, array: [], },
+		{ name: 'Battleship', length: 4, array: [], },
+		{ name: 'Cruiser', length: 3, array: [], },
+		{ name: 'Destroyer', length: 3, array: [], },
+		{ name: 'Frigate', length: 2, array: [], },
 	];
 
 	// function calls
 	generateBoardArray();
+	generateShipArray();
 
 	// creates board-array
 	function generateBoardArray() {
 		for (let i = 0; i < 10; i++) {
-			self.array.push({number: [i]+1});
+			self.array.push({number: i+1});
+		}
+	}
+
+	// creates ship-array
+	function generateShipArray() {
+		for (var i = 0; i < self.shipList.length; i++) {
+			for (var f = 0; f < self.shipList[i].length; f++) {
+				self.shipList[i].array.push({number: f+1})
+				console.log(self.shipList[i].length)
+
+			}
+			console.log(self.shipList[i].length)
 		}
 	}
 }
