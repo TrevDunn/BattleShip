@@ -27,6 +27,11 @@ function GameController($http) {
 	self.playerArray = [];
 	self.test = 'This is a good test';
 	self.newShip = {};
+
+	// ship placement
+	self.tempShip = undefined;
+
+	// ship object list
 	self.shipList = [
 		{
 			id: 1,
@@ -65,9 +70,8 @@ function GameController($http) {
 		},
 	];
 
-	// ship placement
-	self.tempShipID = 0;
-
+	// function links
+	self.clickShipModel = clickShipModel;
 
 	// function calls
 	generateBoardArray();
@@ -96,12 +100,19 @@ function GameController($http) {
 	function generateShipArray() {
 		for (let i = 0; i < self.shipList.length; i++) {
 			for (let f = 0; f < self.shipList[i].length; f++) {
-				self.shipList[i].array.push({number: f+1})
+				self.shipList[i].shipContains.push({
+					'x-lat': undefined,
+					'y-lon': undefined,
+				});
 			}
 		}
 	}
 
 	// function to pass ship ID to square to initialize placement
+	function clickShipModel(ship) {
+		self.tempShip = ship.id;
+		console.log('Hit: fnct clickShipModel');
+	}
 
 
 

@@ -64,7 +64,7 @@
 							</li>
 
 							<li class="boat-button">
-								<div class="block-holder" ng-click="game. ">
+								<div class="block-holder" ng-click="ship.clickable && game.clickShipModel(ship)">
 									<span class="boat-blocks" ng-repeat="array in ship.shipContains" ng-class="{'placed': game.place, 'sunk': game.sunk}"
 									class="square-space">
 									</span>
@@ -79,7 +79,7 @@
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.array">
-								<td ng-repeat="tile in array" ng-click="tile.clickable && tile." ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
+								<td ng-repeat="tile in array" ng-click="tile.clickable && tile.test" ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
 								class="square-space">
 								</td>
 							</tr>
