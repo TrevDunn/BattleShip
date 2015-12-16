@@ -180,16 +180,14 @@ tbody.half-board {
 	background: rgb(255, 179, 179);
 }
 
+
+.option {
+		border: 2px solid olive;
+		background-color: rgba(0, 0, 250, .3);
+		color: olive;
+}
 .occupied {
 	border: 2px solid red;
 	background-color: rgba(256, 0, 0, .3);
 	color: red;
-}
-
-.option {
-	#hit {
-		border: 2px solid olive;
-		background-color: rgba(0, 0, 250, .3);
-		color: olive;
-	}
 }

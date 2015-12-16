@@ -45,7 +45,7 @@
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.oceanArray">
-								<td ng-repeat="tile in array" ng-click="!tile.clickable; tile.clickable && (game.tempShip != undefined) && game.setShipBow(tile)" ng-class="{'winning': tile.hit, 'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								<td ng-repeat="tile in array" ng-click="!tile.clickable; !tile.option && !tile.occupied && (game.tempShipID != undefined) && game.setShipBow(tile); tile.option && game.confirmShip(tile)" ng-class="{'winning': tile.hit, 'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
 								class="player-xlat-{{tile.xlat}} player-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
