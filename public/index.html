@@ -39,12 +39,12 @@
 			<!-- Game Board -->
 			<div class="gameplay-section"
 		 	 ng-hide="auth.token == undefined">
+			 <!-- Player One Board -->
 				<div class="split-screen" id="p1-board">
-					<!-- Player One -->
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+								<td ng-repeat="array in game.array" ng-click="game.place($event)" ng-class="{'winning': cell.winning}"
 								class="square-space">
 								</td>
 							</tr>
@@ -54,7 +54,8 @@
 						Player
 					</div>
 				</div>
-				<!-- Ship-Placement Box -->
+
+				<!-- Ship Key -->
 				<section class="ship-container" id="ship-key">
 					<ul class="ship-key">
 						<div ng-repeat="ship in game.shipList" >
@@ -63,8 +64,8 @@
 							</li>
 
 							<li class="boat-button">
-								<div class="block-holder">
-									<span class="boat-blocks"ng-repeat="array in ship.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+								<div class="block-holder" ng-click="game.placable ">
+									<span class="boat-blocks"ng-repeat="array in ship.array" ng-class="{'winning': cell.winning}"
 									class="square-space">
 									</span>
 								</div>
@@ -73,12 +74,12 @@
 					</ul>
 				</section>
 
+				<!-- Player Two Board -->
 				<div class="split-screen" id="p2-board">
-					<!-- Player Two -->
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
+								<td ng-repeat="array in game.array" ng-click="game.place" ng-class="{'winning': cell.winning}"
 								class="square-space">
 								</td>
 							</tr>

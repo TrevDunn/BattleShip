@@ -35,6 +35,10 @@ function GameController($http) {
 		{ name: 'Frigate', length: 2, array: [], },
 	];
 
+	// ship placement
+	self.placable = true;
+
+
 	// function calls
 	generateBoardArray();
 	generateShipArray();
@@ -43,6 +47,9 @@ function GameController($http) {
 	function generateBoardArray() {
 		for (let i = 0; i < 10; i++) {
 			self.array.push({number: i+1});
+			for (let f = 0; f < array.length; f++) {
+				array[f]
+			}
 		}
 	}
 
@@ -51,13 +58,34 @@ function GameController($http) {
 		for (var i = 0; i < self.shipList.length; i++) {
 			for (var f = 0; f < self.shipList[i].length; f++) {
 				self.shipList[i].array.push({number: f+1})
-				console.log(self.shipList[i].length)
+				// console.log(self.shipList[i].length)
 
 			}
-			console.log(self.shipList[i].length)
+			// console.log(self.shipList[i].length)
 		}
 	}
+
+	// when Click on ship image, identify which ship has been clicked
+	function clickShipModel() {
+
+	}
+
+	// when click on tile, identify which tile has been
+		// clicked (by coords)
+
+	// check if tile is placable at stern (down and right only)
+
+	// ship 'placed' status makes ship image unclickable
+
+	// ship
 }
+
+
+
+
+
+
+
 
 UsersController.$inject = ['$http'];
 function UsersController($http) {
