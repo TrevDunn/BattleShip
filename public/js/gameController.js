@@ -28,15 +28,45 @@ function GameController($http) {
 	self.test = 'This is a good test';
 	self.newShip = {};
 	self.shipList = [
-		{ name: 'Aircraft Carrier', length: 5, array: [], },
-		{ name: 'Battleship', length: 4, array: [], },
-		{ name: 'Cruiser', length: 3, array: [], },
-		{ name: 'Destroyer', length: 3, array: [], },
-		{ name: 'Frigate', length: 2, array: [], },
+		{
+			id: 1,
+			name: 'Aircraft Carrier',
+			length: 5,
+			shipContains: [],
+			clickable: true,
+		},
+		{
+			id: 2,
+			name: 'Battleship',
+			length: 4,
+			shipContains: [],
+			clickable: true,
+		},
+		{
+			id: 3,
+			name: 'Cruiser',
+			length: 3,
+			shipContains: [],
+			clickable: true,
+		},
+		{
+			id: 4,
+			name: 'Destroyer',
+			length: 3,
+			shipContains: [],
+			clickable: true,
+		},
+		{
+			id: 5,
+			name: 'Frigate',
+			length: 2,
+			shipContains: [],
+			clickable: true,
+		},
 	];
 
 	// ship placement
-	self.placable = true;
+	self.tempShipID = 0;
 
 
 	// function calls
@@ -45,33 +75,35 @@ function GameController($http) {
 
 	// creates board-array
 	function generateBoardArray() {
-		for (let i = 0; i < 10; i++) {
-			self.array.push({number: i+1});
-			for (let f = 0; f < array.length; f++) {
-				array[f]
+		for (let x = 0; x < 10; x++) {
+			self.array.push([]);
+			for (let y = 0; y < 10; y++) {
+				self.array[x].push({
+					'x-lat': x+1,
+				 	'y-lon': y+1,
+					clickable: true,
+					occupied: false,
+					hit: false,
+					miss: false,
+				});
+
 			}
 		}
+		console.log(self.array);
 	}
 
 	// creates ship-array
 	function generateShipArray() {
-		for (var i = 0; i < self.shipList.length; i++) {
-			for (var f = 0; f < self.shipList[i].length; f++) {
+		for (let i = 0; i < self.shipList.length; i++) {
+			for (let f = 0; f < self.shipList[i].length; f++) {
 				self.shipList[i].array.push({number: f+1})
-				// console.log(self.shipList[i].length)
-
 			}
-			// console.log(self.shipList[i].length)
 		}
 	}
 
-	// when Click on ship image, identify which ship has been clicked
-	function clickShipModel() {
+	// function to pass ship ID to square to initialize placement
 
-	}
 
-	// when click on tile, identify which tile has been
-		// clicked (by coords)
 
 	// check if tile is placable at stern (down and right only)
 

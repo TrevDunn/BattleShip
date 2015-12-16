@@ -43,8 +43,8 @@
 				<div class="split-screen" id="p1-board">
 					<table class="half-board">
 						<tbody class="half-board">
-							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="game.place($event)" ng-class="{'winning': cell.winning}"
+							<tr ng-repeat="array in game.array[0]">
+								<td ng-repeat="array in game.array[0]" ng-click="" ng-class="{'winning': cell.winning}"
 								class="square-space">
 								</td>
 							</tr>
@@ -64,8 +64,8 @@
 							</li>
 
 							<li class="boat-button">
-								<div class="block-holder" ng-click="game.placable ">
-									<span class="boat-blocks"ng-repeat="array in ship.array" ng-class="{'winning': cell.winning}"
+								<div class="block-holder" ng-click="game. ">
+									<span class="boat-blocks" ng-repeat="array in ship.shipContains" ng-class="{'placed': game.place, 'sunk': game.sunk}"
 									class="square-space">
 									</span>
 								</div>
@@ -79,7 +79,7 @@
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="game.place" ng-class="{'winning': cell.winning}"
+								<td ng-repeat="tile in array" ng-click="tile.clickable && tile." ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
 								class="square-space">
 								</td>
 							</tr>
