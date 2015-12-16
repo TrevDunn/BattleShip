@@ -111,7 +111,7 @@ function GameController($http) {
 	// function to pass ship ID to square to initialize placement
 	function clickShipModel(ship) {
 		self.tempShip = ship.id;
-		console.log('Hit: fnct clickShipModel');
+		console.log('Hit: clickShipModel; tempShip is ' + self.tempShip);
 	}
 
 
@@ -124,7 +124,7 @@ function GameController($http) {
 }
 
 
-
+// !!!
 
 
 
