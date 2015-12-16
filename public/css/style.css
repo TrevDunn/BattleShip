@@ -179,3 +179,17 @@ tbody.half-board {
 	border: 1px solid red;
 	background: rgb(255, 179, 179);
 }
+
+.occupied {
+	border: 2px solid red;
+	background-color: rgba(256, 0, 0, .3);
+	color: red;
+}
+
+.option {
+	#hit {
+		border: 2px solid olive;
+		background-color: rgba(0, 0, 250, .3);
+		color: olive;
+	}
+}

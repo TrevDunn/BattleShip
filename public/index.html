@@ -39,13 +39,14 @@
 			<!-- Game Board -->
 			<div class="gameplay-section"
 		 	 ng-hide="auth.token == undefined">
+
 			 <!-- Player One Board -->
 				<div class="split-screen" id="p1-board">
 					<table class="half-board">
 						<tbody class="half-board">
-							<tr ng-repeat="array in game.array[0]">
-								<td ng-repeat="array in game.array[0]" ng-click="" ng-class="{'winning': cell.winning}"
-								class="square-space">
+							<tr ng-repeat="array in game.oceanArray">
+								<td ng-repeat="tile in array" ng-click="!tile.clickable; tile.clickable && (game.tempShip != undefined) && game.setShipBow(tile)" ng-class="{'winning': tile.hit, 'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								class="player-xlat-{{tile.xlat}} player-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
 						</tbody>
@@ -78,8 +79,8 @@
 				<div class="split-screen" id="p2-board">
 					<table class="half-board">
 						<tbody class="half-board">
-							<tr ng-repeat="array in game.array">
-								<td ng-repeat="tile in array" ng-click="tile.clickable && tile.test" ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
+							<tr ng-repeat="array in game.oceanArray">
+								<td ng-repeat="tile in array" ng-click="!tile.clickable; tile.clickable && !(game.tempShip == undefined) && game.f" ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
 								class="square-space">
 								</td>
 							</tr>
