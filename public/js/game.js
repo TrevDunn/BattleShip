@@ -8,7 +8,7 @@ let GameModule = (function(){
 	let setShip = {
 		id: '',
 		length: 0,
-		sunk: false
+		sunk: false,
 		user: '',
 		bow_x: 0,
 		bow_y: 0,
@@ -16,8 +16,10 @@ let GameModule = (function(){
 	};
 
 	let playerShips = [];
-	let playerArray = [];
+	let playerNames = [];
+	let playerClients = [];
 	let usedCoords = [];
+	let gameArray = undefined;
 
 	// ship constructor function
 	function Ship(id, length, user, bow_x, bow_y, ori_x){
@@ -34,7 +36,7 @@ let GameModule = (function(){
 
 		// create ships
 		makeShip: function(id, length, user, bow_x, bow_y){
-			let newShip = new Ship(id, length, user, bow_x, bow_y ori_x);
+			let newShip = new Ship(id, length, user, bow_x, bow_y, ori_x);
 			playerShips.push(newShip);
 			newShip = undefined;
 		},
@@ -50,22 +52,22 @@ let GameModule = (function(){
 			}
 		},
 
-		// fill in usedCoords array
-		fillCoords: function(newShip){
-			for (let i = 0; i < newShip.length; i++) {
-				// if ship on X-axis
-				if (newShip.ori_x) {
-					let newBowCoords = { (i + newShip.bow_x): newShip.bow_y };
-					usedCoords.push(newBowCoords);
-				// if ship on Y-axis
-				} else if (!newShip.ori_x) {
-					let newBowCoords = { newShip.bow_x: (i + newShip.bow_y) };
-					usedCoords.push(newBowCoords);
-				} else {
-					console.log('something went wrong in fillCoords');
-				}
-			}
-		},
+		// // fill in usedCoords array
+		// fillCoords: function(newShip){
+		// 	for (let i = 0; i < newShip.length; i++) {
+		// 		// if ship on X-axis
+		// 		if (newShip.ori_x) {
+		// 			let newBowCoords = { i + newShip.bow_x: newShip.bow_y };
+		// 			usedCoords.push(newBowCoords);
+		// 		// if ship on Y-axis
+		// 		} else if (!newShip.ori_x) {
+		// 			let newBowCoords = { newShip.bow_x: (i + newShip.bow_y) };
+		// 			usedCoords.push(newBowCoords);
+		// 		} else {
+		// 			console.log('something went wrong in fillCoords');
+		// 		}
+		// 	}
+		// },
 
 		// check to see if ship overlaps others
 		checkOverlap: function(newShip) {
@@ -95,9 +97,35 @@ let GameModule = (function(){
 		// resets the game
 		resetGame: function(){
 			playerShips = [];
-			playerArray = [];
+			playerNames = [];
+			playerClients = [];
 			usedCoords = [];
 		},
+// ~~~~
+
+		// function to push data up to hidden array
+		storeData: function(clientID, data) {
+			playerNames.push(data[0]);
+			playerClients.push(clientID);
+			playerShips.push(data[1]);
+
+			console.log(playerShips);
+
+		},
+
+		// function to begin game if 2 players ready
+		beginGame: function() {
+			if (playerNames.length > 1) {
+				return true;
+			}
+
+		},
+
+		// function to check if guess is hit/miss
+
+		// function to check if ship sunk
+
+		// function to check if all ships sunk
 	}
 })();
 

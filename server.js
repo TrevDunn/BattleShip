@@ -12,7 +12,10 @@ const logger 		= require('morgan');
 
 // Require Routes
 const userRoutes	= require('./routes/userRoutes.js');
-const shipRoutes	= require('./routes/shipRoutes.js')
+const shipRoutes	= require('./routes/shipRoutes.js');
+
+// temporary game logic variables
+const GameModule 	= require('./public/js/game');
 
 // Additional Epress Setup
 app.use(logger('dev'));
@@ -41,13 +44,17 @@ app.use('/', userRoutes);
 // Sockets
 io.on('connection', (socket) => {
 	console.log('USER CONNECTED');
+	console.log(socket.id);
 
 	// socket function that receives player and ship data from client
 	socket.on('client ready', (data) => {
-		
-	io.emit('send message', data);
+		GameModule.storeData(socket.id , data);
+
+		io.emit('game start', GameModule.beginGame());
 	});
+
 });
+
 
 // Server Setup
 server.listen(app.get('port'), () => {

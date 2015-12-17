@@ -5,6 +5,7 @@ let token;
 let clientUsername;
 let clientID;
 let clientShips = undefined;
+let turnToggle;
 
 console.log('this is my token: ' + token);
 
@@ -16,6 +17,8 @@ angular.module('Battleship2')
 
 console.log('hit: GameController.js');
 
+
+
 GameController.$inject = ['$http'];
 function GameController($http) {
 	console.log('hit: GameController public/js/gameController.js');
@@ -26,6 +29,7 @@ function GameController($http) {
 	self.showGameBoard = false;
 	self.playerArray = [];
 	self.newShip = {};
+	self.turnToggle = turnToggle;
 	// self.test = 'This is a good test';
 	self.test = function(tile){
 		self.oceanArray[1][0].occupied = true;
@@ -351,12 +355,23 @@ function AuthController($http) {
 
 // Socket Connectivity
 
+socket.on('game start', (data) => {
+	// check to see if it's current user
+	console.log('turntoggle socket hit');
+	if(data) {
+		turnToggle = true;
+	}
+
+});
+
 // function that sends data via socket to server
 function sendSocketData() {
 	let data = [clientUsername, clientShips];
 	console.log(data);
 	socket.emit('client ready', data);
 }
+
+
 
 
 
