@@ -39,6 +39,10 @@ function GameController($http) {
 	self.tempShipID = undefined;
 	self.tempShipLength = undefined;
 	self.shipPlacing = false;
+	self.bowCoordsX = undefined;
+	self.bowCoordsY = undefined;
+	self.tempOptionX = undefined;
+	self.tempOptionY = undefined;
 
 	// ship object list
 	self.shipList = [
@@ -82,8 +86,7 @@ function GameController($http) {
 	// function links
 	self.clickShipModel = clickShipModel;
 	self.setShipBow = setShipBow;
-	// self.occupiedCheckX = occupiedCheckX;
-	// self.occupiedCheckY = occupiedCheckY;
+	self.confirmShip = confirmShip;
 
 	// function calls
 	generateBoardArray();
@@ -125,7 +128,6 @@ function GameController($http) {
 	function clickShipModel(ship) {
 		self.tempShipID = ship.id;
 		self.tempShipLength = ship.length;
-		ship.clickable = false;
 		console.log('Hit: clickShipModel; tempShipID is ' + self.tempShipID);
 	}
 
@@ -142,6 +144,7 @@ function GameController($http) {
 		if (occupiedCheckX(tile, optionX)) {
 			self.oceanArray[tile.ylon][optionX].option = true;
 			placableShip = true;
+			self.tempOptionX = optionX;
 			console.log('optionX is '+optionX);
 		} else {
 			console.log("No optionX");
@@ -151,6 +154,7 @@ function GameController($http) {
 		if (occupiedCheckY(tile, optionY)) {
 			self.oceanArray[optionY][tile.xlat].option = true;
 			placableShip = true;
+			self.tempOptionY = optionY;
 			console.log('optionY is '+optionY);
 		} else {
 			console.log("No optionY");
@@ -160,7 +164,8 @@ function GameController($http) {
 		if (placableShip) {
 			tile.occupied = true;
 			self.shipPlacing = true;
-			self.tempShipID = undefined;
+			self.bowCoordsX = tile.xlat;
+			self.bowCoordsY = tile.ylon;
 			self.tempShipLength = undefined;
 		}
 	}
@@ -187,22 +192,67 @@ function GameController($http) {
 		return true;
 	}
 
-	function 
+	function confirmShip(tile){
 
-	// function to activate viable down and right boxes for ship placement
+		let confirmation = undefined;
+		let shipLengthX = tile.xlat-self.bowCoordsX;
+		let shipLengthY = tile.ylon-self.bowCoordsY;
 
-	// function to re-activate all tiles as clickable except those with ships
-
-
-	// check if tile is placable at stern (down and right only)
-
-	// ship 'placed' status makes ship image unclickable
-
-	// ship
-}
+		console.log('shipLengthX : '+ shipLengthX);
+		console.log('shipLengthY : '+ shipLengthY);
 
 
-// fff
+		if (shipLengthX > 0) {
+			for (let i = 1; i < shipLengthX + 1; i++) {
+				let tempTile = self.oceanArray[tile.ylon][tile.xlat - i]
+				tempTile.option = false;
+				tempTile.occupied = self.tempShipID;
+			}
+			tile.option = false;
+			tile.occupied = self.tempShipID;
+			confirmation = true;
+		} else if (shipLengthY > 0) {
+			for (let i = 1; i < shipLengthY + 1; i++) {
+				let tempTile = self.oceanArray[tile.ylon - i][tile.xlat]
+				tempTile.option = false;
+				tempTile.occupied = self.tempShipID;
+			}
+			tile.option = false;
+			tile.occupied = self.tempShipID;
+			confirmation = true;
+		}
+
+		if (confirmation) {
+
+			self.bowCoordsX = undefined;
+			self.bowCoordsY = undefined;
+			self.shipList[self.tempShipID - 1].clickable = false;
+			self.tempShipID = undefined;
+			clearOptions();
+		}
+	}
+
+	// function to clear board or option tiles
+	function clearOptions() {
+		for (let y = 0; y < 10; y++) {
+			for (let x = 0; x < 10; x++) {
+				if (self.oceanArray[y][x].option) {
+					self.oceanArray[y][x].option = false;
+				}
+			}
+		}
+	}
+
+	// function to send ship-placement data to server
+
+
+
+
+
+} // fff
+
+
+
 
 
 
