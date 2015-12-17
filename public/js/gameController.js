@@ -1,10 +1,9 @@
 'use strict';
 
 let socket = io();
-let myUser;
-let myId;
+let clientUsername;
+let clientID;
 let token;
-
 
 console.log('this is my token: ' + token);
 
@@ -242,14 +241,16 @@ function GameController($http) {
 			}
 		}
 	}
-
-	// function to send ship-placement data to server
-
-
-
-
-
 } // fff
+
+// Socket Connectivity
+
+// function that sends data via socket to server
+function function_name(argument) {
+	// body...
+	socket.emit('add user', username);
+}
+
 
 
 
@@ -309,6 +310,7 @@ function AuthController($http) {
 	self.login = login;
 	self.token = token;
 	self.allowGame = false;
+	self.getUsername = getUsername;
 
 
 	function login(user) {
@@ -329,5 +331,10 @@ function AuthController($http) {
 
 				console.log(self.token);
 			})
+	}
+
+	function getUsername(user) {
+		clientUsername = user.username;
+		console.log('Got the bleedin username, mate: ' + clientUsername);
 	}
 }

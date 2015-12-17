@@ -38,7 +38,15 @@ mongoose.connect(mongoUri, (err) => {
 app.use('/', userRoutes);
 // app.use('/ship', shipRoutes);
 
+// Sockets
+io.on('connection', (socket) => {
+	console.log('USER CONNECTED');
 
+	// socket function that receives player and ship data from client
+	socket.on('send message', (data) => {
+	io.emit('send message', data);
+	});
+});
 
 // Server Setup
 server.listen(app.get('port'), () => {

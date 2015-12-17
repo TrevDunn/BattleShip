@@ -106,7 +106,7 @@
 						<input type="text" placeholder="Username" id="login-username" ng-model="user.username"><br>
 						<input type="password" placeholder="Password" id="login-password" ng-model="user.password">
 					</div>
-					<button class="submit-butt" id="login-submit" ng-click="auth.login(user); ">Login</button>
+					<button class="submit-butt" id="login-submit" ng-click="auth.login(user); auth.getUsername(user)">Login</button>
 					<!-- </form> -->
 					<a href="localhost:3000/signup">
 						<h4 id="signuplink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Sign Up</h4>
