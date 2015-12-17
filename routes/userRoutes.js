@@ -77,7 +77,7 @@ router.route('/user/:username/addLoss')
 // 		$('.user-login').hide();
 // 	});
 // }
-//
+
 // let signup = function() {
 // 	let username = $("#signup-username").val();
 // 	let password = $("#signup-password").val();
@@ -100,10 +100,11 @@ router.route('/user/:username/addLoss')
 
 // post new user
 function create(req, res){
-	console.log('hit: create funciton');
+	console.log('hit: create function');
 	let userObject = new User(req.body);
 	userObject.save((err, user) => {
 		if (err) res.status(401).send({message: err.errmsg});
+		console.log(user);
 		res.status(200).send(user);
 	})
 }

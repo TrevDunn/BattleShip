@@ -281,21 +281,22 @@ function UsersController($http) {
 	// self.updateUser = updateUser;	// U
 	self.destroyUser = destroyUser;	// D
 	self.toggleLoginSignUp = true;
+	self.newUser = newUser;
 
 	function getUser() {
 		console.log('hit: UsersControllers getUser function');
 		$http
-			.get('http://localhost:3000/user')
+			.get('http://localhost:3000/user/:username'+ user._id)
 			.then(function(respose){
 				self.all = response.data.users;
 			});
 	}
 
-	function postUser() {
+	function newUser() {
 		console.log('hit: UsersControllers postUser function');
 
 		$http
-			.post('http://localhost:3000/user', self.postUser)
+			.post('http://localhost:3000/user/signup', self.postUser)
 			.then(function(response){
 				getUser();
 			});
@@ -360,6 +361,9 @@ socket.on('game start', (data) => {
 	console.log('turntoggle socket hit');
 	if(data) {
 		turnToggle = true;
+		console.log(GameController.turntoggle);
+		GameController.turntoggle = true;
+		console.log(GameController.turntoggle);
 	}
 
 });

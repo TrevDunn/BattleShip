@@ -114,10 +114,10 @@ let GameModule = (function(){
 		},
 
 		// function to begin game if 2 players ready
-		beginGame: function() {
-			if (playerNames.length > 1) {
+		beginGame: function(clientID) {
+			if (playerNames.length > 1 && clientID == ) {
 				return true;
-			}
+			} else {return false}
 
 		},
 
