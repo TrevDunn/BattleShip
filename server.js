@@ -43,7 +43,8 @@ io.on('connection', (socket) => {
 	console.log('USER CONNECTED');
 
 	// socket function that receives player and ship data from client
-	socket.on('send message', (data) => {
+	socket.on('client ready', (data) => {
+		
 	io.emit('send message', data);
 	});
 });

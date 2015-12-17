@@ -1,9 +1,10 @@
 'use strict';
 
 let socket = io();
+let token;
 let clientUsername;
 let clientID;
-let token;
+let clientShips = undefined;
 
 console.log('this is my token: ' + token);
 
@@ -42,6 +43,7 @@ function GameController($http) {
 	self.bowCoordsY = undefined;
 	self.tempOptionX = undefined;
 	self.tempOptionY = undefined;
+	self.remainingShips = 5;
 
 	// ship object list
 	self.shipList = [
@@ -49,36 +51,41 @@ function GameController($http) {
 			id: 1,
 			name: 'Aircraft Carrier',
 			length: 5,
-			shipContains: [],
+			shipCoords: [],
 			clickable: true,
+			boxLength: [1,2,3,4,5]
 		},
 		{
 			id: 2,
 			name: 'Battleship',
 			length: 4,
-			shipContains: [],
+			shipCoords: [],
 			clickable: true,
+			boxLength: [1,2,3,4]
 		},
 		{
 			id: 3,
 			name: 'Cruiser',
 			length: 3,
-			shipContains: [],
+			shipCoords: [],
 			clickable: true,
+			boxLength: [1,2,3]
 		},
 		{
 			id: 4,
 			name: 'Destroyer',
 			length: 3,
-			shipContains: [],
+			shipCoords: [],
 			clickable: true,
+			boxLength: [1,2,3]
 		},
 		{
 			id: 5,
 			name: 'Frigate',
 			length: 2,
-			shipContains: [],
+			shipCoords: [],
 			clickable: true,
+			boxLength: [1,2]
 		},
 	];
 
@@ -89,7 +96,6 @@ function GameController($http) {
 
 	// function calls
 	generateBoardArray();
-	generateShipArray();
 
 	// creates board-array
 	function generateBoardArray() {
@@ -112,15 +118,11 @@ function GameController($http) {
 	}
 
 	// creates ship-array
-	function generateShipArray() {
-		for (let i = 0; i < self.shipList.length; i++) {
-			for (let f = 0; f < self.shipList[i].length; f++) {
-				self.shipList[i].shipContains.push({
-					'xlat': undefined,
-					'ylon': undefined,
-				});
-			}
-		}
+	function generateShipCoords(id, x , y) {
+		self.shipList[id - 1].shipCoords.push({
+			'xlat': x,
+			'ylon': y,
+		});
 	}
 
 	// function to pass ship ID to square to initialize placement
@@ -206,18 +208,23 @@ function GameController($http) {
 				let tempTile = self.oceanArray[tile.ylon][tile.xlat - i]
 				tempTile.option = false;
 				tempTile.occupied = self.tempShipID;
+
+				generateShipCoords(self.tempShipID, tile.ylon, (tile.xlat-i));
 			}
 			tile.option = false;
 			tile.occupied = self.tempShipID;
+			generateShipCoords(self.tempShipID, tile.ylon, tile.xlat);
 			confirmation = true;
 		} else if (shipLengthY > 0) {
 			for (let i = 1; i < shipLengthY + 1; i++) {
 				let tempTile = self.oceanArray[tile.ylon - i][tile.xlat]
 				tempTile.option = false;
 				tempTile.occupied = self.tempShipID;
+				generateShipCoords(self.tempShipID, (tile.ylon-i), tile.xlat);
 			}
 			tile.option = false;
 			tile.occupied = self.tempShipID;
+			generateShipCoords(self.tempShipID, tile.ylon, tile.xlat);
 			confirmation = true;
 		}
 
@@ -228,6 +235,7 @@ function GameController($http) {
 			self.shipList[self.tempShipID - 1].clickable = false;
 			self.tempShipID = undefined;
 			clearOptions();
+			readyPlayer();
 		}
 	}
 
@@ -241,20 +249,20 @@ function GameController($http) {
 			}
 		}
 	}
+
+	// function detects when all ships are placed and
+	// prepares global variables for socket use outside
+	// of controller
+	function readyPlayer() {
+		self.remainingShips = self.remainingShips - 1;
+		if (self.remainingShips == 0) {
+			console.log("All ships ready");
+			clientShips = self.shipList;
+			console.log(clientShips);
+			sendSocketData();
+		}
+	}
 } // fff
-
-// Socket Connectivity
-
-// function that sends data via socket to server
-function function_name(argument) {
-	// body...
-	socket.emit('add user', username);
-}
-
-
-
-
-
 
 
 
@@ -338,3 +346,32 @@ function AuthController($http) {
 		console.log('Got the bleedin username, mate: ' + clientUsername);
 	}
 }
+
+
+
+// Socket Connectivity
+
+// function that sends data via socket to server
+function sendSocketData() {
+	let data = [clientUsername, clientShips];
+	console.log(data);
+	socket.emit('client ready', data);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

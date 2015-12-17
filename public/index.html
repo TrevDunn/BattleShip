@@ -66,7 +66,7 @@
 
 							<li class="boat-button">
 								<div class="block-holder" ng-click="ship.clickable && game.clickShipModel(ship)">
-									<span class="boat-blocks" ng-repeat="array in ship.shipContains" ng-class="{'placed': game.place, 'sunk': game.sunk}"
+									<span class="boat-blocks" ng-repeat="array in ship.boxLength" ng-class="{'placed': game.place, 'sunk': game.sunk}"
 									class="square-space">
 									</span>
 								</div>
