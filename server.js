@@ -12,7 +12,10 @@ const logger 		= require('morgan');
 
 // Require Routes
 const userRoutes	= require('./routes/userRoutes.js');
-const shipRoutes	= require('./routes/shipRoutes.js')
+const shipRoutes	= require('./routes/shipRoutes.js');
+
+// temporary game logic variables
+const GameModule 	= require('./public/js/game');
 
 // Additional Epress Setup
 app.use(logger('dev'));
@@ -38,6 +41,24 @@ mongoose.connect(mongoUri, (err) => {
 app.use('/', userRoutes);
 // app.use('/ship', shipRoutes);
 
+// Sockets
+io.on('connection', (socket) => {
+	console.log('USER CONNECTED');
+	console.log(socket.id);
+
+	// socket function that receives player and ship data from client
+	socket.on('client ready', (data) => {
+
+		io.emit('game start', GameModule.storeData(socket.id, data));
+	});
+
+	// get a guess
+	socket.on('guessing a square', (data) => {
+		console.log('quessing a square: ' + data);
+		io.emit('hit or miss response', GameModule.hitCheck(data));
+	});
+
+});
 
 
 // Server Setup

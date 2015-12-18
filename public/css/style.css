@@ -58,6 +58,11 @@ button {
 	margin-left: 14%;
 }
 
+.container {
+	max-width: 92%;
+	margin: 0 auto;
+}
+
 .split-screen {
 	border: 5px solid darkgrey;
 	background: rgb(110, 110, 256);
@@ -72,13 +77,14 @@ button {
 .square-space {
 	display: inline-block;
 	border: 2px solid rgba(88, 200, 0, 1);
-	padding: 20px;
+	border-bottom: 0;
+	padding: 15px;
 	max-width: 100px;
-	min-width: 20px;
+	min-width: 15px;
 	max-height: 100px;
-	min-height: 20px;
-	height: 20px;
-	width: 20px;
+	min-height: 15px;
+	height: 15px;
+	width: 15px;
 	color: blue;
 	text-align: center;
 	vertical-align: center;
@@ -94,6 +100,9 @@ section#ship-key {
 	display: inline-block;
 	float: left;
 	background-color: lightgrey;
+	min-width: 250px;
+	min-height: 280px;
+	margin: 15px auto;
 }
 
 li{
@@ -104,17 +113,19 @@ li.boat-button {
 	display: inline;
 }
 
-div.block-holder {
-	display: inline-flex;
+
+.block-holder {
+	display: flex;
 	background: solid red;
 }
 
-div [type='boat-blocks'] {
+span.boat-blocks{
 	width: 20px;
 	height: 20px;
 	background: rgb(204, 224, 210);
 	border: 1px solid rgb(0, 100, 30);
 }
+
 #timer {
 	float: right;
 	border: 2px solid rgba(88, 200, 0, 1);
@@ -144,6 +155,19 @@ div [type='boat-blocks'] {
 // Game Function  //
 //////////////////*/
 
+table.half-board {
+	background: rgba(88, 200, 0, 1);
+}
+
+tbody.half-board {
+	background: rgb(110, 110, 256);
+}
+
+.gameplay-section {
+	display: inline-block;
+	margin: 0 auto;
+	margin-left: 2%;
+}
 
 #hit {
 	border: 2px solid red;
@@ -154,4 +178,16 @@ div [type='boat-blocks'] {
 #boat-hits {
 	border: 1px solid red;
 	background: rgb(255, 179, 179);
+}
+
+
+.option {
+		border: 2px solid olive;
+		background-color: rgba(0, 0, 250, .3);
+		color: olive;
+}
+.occupied {
+	border: 2px solid red;
+	background-color: rgba(256, 0, 0, .3);
+	color: red;
 }

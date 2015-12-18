@@ -18,13 +18,13 @@
 		<script src="js/app.js"></script>
 		<script src="js/gameController.js"></script>
 	</head>
-	<body >
+	<body ng-controller="AuthController as auth">
 
+		<!-- GAME VIEW -->
 		<div class="container" ng-controller="GameController as game">
 
 			<!-- Top Nav Bar -->
 			<nav id="menu">
-				<button id="start-round">Start Round</button>
 				<ul id="nav-bar">
 					<li class="nav-tool" id="nav-profile">
 						PROFILE
@@ -37,71 +37,90 @@
 
 			<!-- Game Board -->
 			<div class="gameplay-section"
-		 	 ng-show="game.showGameBoard">
-				<div class="split-screen" id="p1-board">
-					<!-- Player One -->
-					<table class="half-board">
-						<tbody>
-							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
-								class="square-space">
+		 	 ng-hide="auth.token == undefined">
 
+			 <!-- Player Board -->
+				<div class="split-screen" id="p1-board">
+					<table class="half-board">
+						<tbody class="half-board">
+							<tr ng-repeat="array in game.oceanArray">
+								<td ng-repeat="tile in array" ng-click="!tile.clickable; !tile.option && !tile.occupied && (game.tempShipLength != undefined) && game.setShipBow(tile); tile.option && game.confirmShip(tile)" ng-class="{'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								class="player-xlat-{{tile.xlat}} player-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					<div id="player-name">
+						Player
 					</div>
 				</div>
 
+				<!-- Ship Key -->
+				<section class="ship-container" id="ship-key">
+					<ul class="ship-key">
+						<div ng-repeat="ship in game.shipList" >
+							<li class="ship-name">
+								{{ ship.name }}
+							</li>
+
+							<li class="boat-button">
+								<div class="block-holder" ng-click="ship.clickable && game.clickShipModel(ship)">
+									<span class="boat-blocks" ng-repeat="array in ship.boxLength" ng-class="{'placed': game.place, 'sunk': game.sunk}"
+									class="square-space">
+									</span>
+								</div>
+							</li>
+						</div>
+					</ul>
+				</section>
+
+				<!-- Opponent Board -->
 				<div class="split-screen" id="p2-board">
-					<!-- Player Two -->
 					<table class="half-board">
-						<tbody>
-							<tr ng-repeat="array in game.array">
-								<td ng-repeat="array in game.array" ng-click="board.playCell(cell)" ng-class="{'winning': cell.winning}"
-								class="square-space">
+						<tbody class="half-board">
+							<tr ng-repeat="array in game.opponentOceanArray">
+								<td ng-repeat="tile in array" ng-click="tile.clickable &&  game.guessSquare(tile)" ng-class="{'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								class="opponent-xlat-{{tile.xlat}} opponent-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					<div id="opponent-name">
-
+					<div class="playingName" id="opponent-name">
+						Opponent
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div ng-controller="UsersController as users">
+
+		<!-- LOGIN/SIGN-UP -->
+		<div ng-show="auth.token == undefined" >
 
 			<!-- Log-in: Form and submit -->
-			<div ng-controller="AuthController as auth">
+			<div ng-controller="UsersController as users">
 				<div class="user-view user-login" ng-show="users.toggleLoginSignUp">
 					<h1 class="title-card"></h1>
 					<!-- <form id="login-form"> -->
 					<div class="form-box">
-						<input type="text" placeholder="Username" id="login-username"><br>
-						<input type="password" placeholder="Password" id="login-password">
+						<input type="text" placeholder="Username" id="login-username" ng-model="user.username"><br>
+						<input type="password" placeholder="Password" id="login-password" ng-model="user.password">
 					</div>
-					<button class="submit-butt" id="login-submit" ng-submit="">Login</button>
+					<button class="submit-butt" id="login-submit" ng-click="auth.login(user); auth.getUsername(user)">Login</button>
 					<!-- </form> -->
 					<a href="localhost:3000/signup">
 						<h4 id="signuplink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Sign Up</h4>
 					</a>
 				</div>
-			</div>
 
 			<!-- Signup: Form and Submit -->
-			<div >
 				<div class="user-view user-signup" ng-hide="users.toggleLoginSignUp">
 					<h1 class="title-card"></h1>
 					<!-- <form id="signup-form"> -->
 					<div class="form-box">
-						<input type="text" placeholder="Username" id="signup-username" value=""><br>
-						<input type="password" placeholder="Password" id="signup-password"><br>
+						<input type="text" placeholder="Username" id="signup-username" value="" ng-model="users.postUser.username"><br>
+						<input type="password" placeholder="Password" id="signup-password" ng-model="users.postUser.password"><br>
 					</div>
-
-					<button class="submit-butt" id="signup-submit" ng-submit="users.addUser()">Sign Up</button>
+					<button class="submit-butt" id="signup-submit" ng-click="users.newUser()">Sign Up</button>
 					<!-- </form> -->
 					<a href="localhost:3000/login">
 						<h4 id="loginlink" ng-click="users.toggleLoginSignUp = !users.toggleLoginSignUp">Back to Login</h4>
@@ -109,7 +128,8 @@
 				</div>
 			</div>
 		</div>
-
-		This is a test to see if things are working.
+		<footer>
+			Provided by Trevor Dunn
+		</footer>
 	</body>
 </html>

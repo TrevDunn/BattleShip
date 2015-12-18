@@ -51,59 +51,60 @@ router.route('/user/:username/addLoss')
 	.put(addLoss);
 
 
-let login = function() {
-	// event.preventDefault();
+// let login = function() {
+// 	// event.preventDefault();
+//
+// 	let username = $("#login-username").val();
+// 	let password = $("#login-password").val();
+// 	let userData = {
+// 		username: username,
+// 		password: password
+// 	}
+//
+// 	myUser = username;
+// 	myId = socket.id;
+// 	// socket.emit('add user', username);
+// 	console.log('hit: login function (in routes/userRoutes.js)');
+// 	$.ajax({
+// 		url: "/user/auth",
+// 		method: "POST",
+// 		data: userData
+//
+// 	}).done((user) => {
+// 		// Actions taken on successful log-in
+// 		localStorage.setItem('userToken', user.token);
+// 		$('.container').show();
+// 		$('.user-login').hide();
+// 	});
+// }
 
-	let username = $("#login-username").val();
-	let password = $("#login-password").val();
-	let userData = {
-		username: username,
-		password: password
-	}
-
-	myUser = username;
-	myId = socket.id;
-	// socket.emit('add user', username);
-	console.log('hit: login function (in routes/userRoutes.js)');
-	$.ajax({
-		url: "/user/auth",
-		method: "POST",
-		data: userData
-
-	}).done((user) => {
-		// Actions taken on successful log-in
-		localStorage.setItem('userToken', user.token);
-		$('.container').show();
-		$('.user-login').hide();
-	});
-}
-
-let signup = function() {
-	let username = $("#signup-username").val();
-	let password = $("#signup-password").val();
-	let userData = {
-		username: username,
-		password: password,
-		wins: 0
-	}
-	console.log('hit: signup function (in routes/userRoutes.js)');
-	$.ajax({
-		url: "/user/signup",
-		method: "POST",
-		data: userData
-	}).done(() => {
-			$('.user-signup').hide();
-			$('.user-login').show();
-	});
-}
+// let signup = function() {
+// 	let username = $("#signup-username").val();
+// 	let password = $("#signup-password").val();
+// 	let userData = {
+// 		username: username,
+// 		password: password,
+// 		wins: 0
+// 	}
+// 	console.log('hit: signup function (in routes/userRoutes.js)');
+// 	$.ajax({
+// 		url: "/user/signup",
+// 		method: "POST",
+// 		data: userData
+// 	}).done(() => {
+// 			$('.user-signup').hide();
+// 			$('.user-login').show();
+// 	});
+// }
 
 
 // post new user
 function create(req, res){
-	console.log('hit: create funciton');
+	console.log('hit: create function');
 	let userObject = new User(req.body);
 	userObject.save((err, user) => {
 		if (err) res.status(401).send({message: err.errmsg});
+		console.log(user);
 		res.status(200).send(user);
 	})
 }
