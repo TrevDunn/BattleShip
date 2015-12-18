@@ -25,7 +25,6 @@
 
 			<!-- Top Nav Bar -->
 			<nav id="menu">
-				<button id="start-round">Start Round</button>
 				<ul id="nav-bar">
 					<li class="nav-tool" id="nav-profile">
 						PROFILE
@@ -40,12 +39,12 @@
 			<div class="gameplay-section"
 		 	 ng-hide="auth.token == undefined">
 
-			 <!-- Player One Board -->
+			 <!-- Player Board -->
 				<div class="split-screen" id="p1-board">
 					<table class="half-board">
 						<tbody class="half-board">
 							<tr ng-repeat="array in game.oceanArray">
-								<td ng-repeat="tile in array" ng-click="!tile.clickable; !tile.option && !tile.occupied && (game.tempShipLength != undefined) && game.setShipBow(tile); tile.option && game.confirmShip(tile)" ng-class="{'winning': tile.hit, 'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								<td ng-repeat="tile in array" ng-click="!tile.clickable; !tile.option && !tile.occupied && (game.tempShipLength != undefined) && game.setShipBow(tile); tile.option && game.confirmShip(tile)" ng-class="{'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
 								class="player-xlat-{{tile.xlat}} player-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
@@ -75,13 +74,13 @@
 					</ul>
 				</section>
 
-				<!-- Player Two Board -->
+				<!-- Opponent Board -->
 				<div class="split-screen" id="p2-board">
 					<table class="half-board">
 						<tbody class="half-board">
-							<tr ng-repeat="array in game.oceanArray">
-								<td ng-repeat="tile in array" ng-click="!tile.clickable; tile.clickable && !(game.tempShip == undefined) && game.f" ng-class="{'winning': tile.hit, 'hit': tile.hit, 'miss': tile.miss }"
-								class="square-space">
+							<tr ng-repeat="array in game.opponentOceanArray">
+								<td ng-repeat="tile in array" ng-click="tile.clickable &&  game.guessSquare(tile)" ng-class="{'occupied': tile.occupied, 'option': tile.option, 'hit': tile.hit, 'miss': tile.miss}"
+								class="opponent-xlat-{{tile.xlat}} opponent-ylon-{{tile.ylon}} square-space">
 								</td>
 							</tr>
 						</tbody>

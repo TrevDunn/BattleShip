@@ -105,23 +105,46 @@ let GameModule = (function(){
 
 		// function to push data up to hidden array
 		storeData: function(clientID, data) {
+			console.log('storeData function for clientID: ' + clientID);
+			console.log('storeData function for data: ' + data);
 			playerNames.push(data[0]);
 			playerClients.push(clientID);
 			playerShips.push(data[1]);
+			console.log('storeData function for playerNames: ' + playerNames);
+			console.log('storeData function for playerClients: ' + playerClients);
+			console.log('storeData function for playerShips: ' + playerShips);
 
-			console.log(playerShips);
+			return playerClients
 
 		},
 
 		// function to begin game if 2 players ready
-		beginGame: function(clientID) {
-			if (playerNames.length > 1 && clientID == ) {
-				return true;
-			} else {return false}
-
-		},
+		// beginGame: function(clientID) {
+		// 	while (playerNames.length <= 1) {
+		// 		console.log('waiting');
+		// 		// console.log([[clientID, playerClients[0]]]);
+		// 		if (playerNames.length > 1) {
+		// 			return [clientID, playerClients[0]];
+		// 		}
+		// 	}
+		// },
 
 		// function to check if guess is hit/miss
+		hitCheck: function(data) {
+
+			console.log('hitCheck data: ' + data);
+			for (let i = 0; i < 5; i++) {
+				for (let f = 0; f < playerShips[i].shipCoords.length; f++) {
+					array[f]
+					console.log(playerShips[i].shipCoords[f].xlat);
+					if (playerShips[i].shipCoords[f].xlat == data[0] && playerShips[i].shipCoords[f].ylon == data[1]) {
+						return [data, true];
+					} else {
+						return [data, false];
+					}
+				}
+			}
+		},
 
 		// function to check if ship sunk
 

@@ -48,9 +48,14 @@ io.on('connection', (socket) => {
 
 	// socket function that receives player and ship data from client
 	socket.on('client ready', (data) => {
-		GameModule.storeData(socket.id , data);
 
-		io.emit('game start', GameModule.beginGame());
+		io.emit('game start', GameModule.storeData(socket.id, data));
+	});
+
+	// get a guess
+	socket.on('guessing a square', (data) => {
+		console.log('quessing a square: ' + data);
+		io.emit('hit or miss response', GameModule.hitCheck(data));
 	});
 
 });

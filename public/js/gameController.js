@@ -5,7 +5,7 @@ let token;
 let clientUsername;
 let clientID;
 let clientShips = undefined;
-let turnToggle;
+let turnToggle = false;
 
 console.log('this is my token: ' + token);
 
@@ -26,10 +26,13 @@ function GameController($http) {
 	// controller variable setup
 	let self = this;
 	self.oceanArray = [];
+	self.opponentOceanArray= [];
 	self.showGameBoard = false;
 	self.playerArray = [];
 	self.newShip = {};
-	self.turnToggle = turnToggle;
+	// self.turnToggle = false;
+	self.detectResponse = false;
+	self.responseValue = undefined;
 	// self.test = 'This is a good test';
 	self.test = function(tile){
 		self.oceanArray[1][0].occupied = true;
@@ -97,9 +100,11 @@ function GameController($http) {
 	self.clickShipModel = clickShipModel;
 	self.setShipBow = setShipBow;
 	self.confirmShip = confirmShip;
+	self.guessSquare = guessSquare;
 
 	// function calls
 	generateBoardArray();
+	generateOpponantBoardArray();
 
 	// creates board-array
 	function generateBoardArray() {
@@ -127,6 +132,26 @@ function GameController($http) {
 			'xlat': x,
 			'ylon': y,
 		});
+	}
+
+	// creates opponent's board-array
+	function generateOpponantBoardArray() {
+		for (let y = 0; y < 10; y++) {
+			self.opponentOceanArray.push([]);
+			for (let x = 0; x < 10; x++) {
+				self.opponentOceanArray[y].push({
+				 	'ylon': y,
+					'xlat': x,
+					clickable: true,
+					occupied: false,
+					option: false,
+					hit: false,
+					miss: false,
+				});
+
+			}
+		}
+		console.log(self.opponentOceanArray);
 	}
 
 	// function to pass ship ID to square to initialize placement
@@ -266,6 +291,15 @@ function GameController($http) {
 			sendSocketData();
 		}
 	}
+
+	// guess a square
+	function guessSquare(tile) {
+		if (turnToggle) {
+
+		}
+		console.log('hit guessSquare');
+		sendGuess(tile.xlat, tile.ylon);
+	}
 } // fff
 
 
@@ -358,21 +392,58 @@ function AuthController($http) {
 
 socket.on('game start', (data) => {
 	// check to see if it's current user
-	console.log('turntoggle socket hit');
-	if(data) {
+
+	// console.log('turnToggle socket data: ' + data);
+	// if(data) {
+	// 	GameController.turnToggle = true;
+	// } else {
+	// 	GameController.turnToggle = false;
+	// }
+
+	console.log('turnToggle socket hit');
+	if (socket.id = data[1]) {
 		turnToggle = true;
-		console.log(GameController.turntoggle);
-		GameController.turntoggle = true;
-		console.log(GameController.turntoggle);
+		console.log('you go first');
+
+		console.log(this);
+		console.log(this.GameController);
+		console.log(this.GameController.shipList);
+		console.log(Window.GameController);
+		console.log(Window.GameController.shipList);
 	}
 
 });
+
+socket.on('hit or miss response', data => {
+	if (turnToggle) {
+		if (data[1]) {
+			// hit
+
+		} else if (!data[1]) {
+			// miss
+		}
+
+	} else if (!turnToggle) {
+		if (data[1]) {
+
+		} else if (!data[1]) {
+			// miss
+		}
+
+	}
+})
 
 // function that sends data via socket to server
 function sendSocketData() {
 	let data = [clientUsername, clientShips];
 	console.log(data);
 	socket.emit('client ready', data);
+}
+
+function sendGuess(xlat, ylon) {
+	console.log('sending guess data');
+	let data = [xlat, ylon];
+	socket.emit('guessing a square', data);
 }
 
 
